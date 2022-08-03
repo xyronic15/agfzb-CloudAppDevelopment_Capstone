@@ -22,10 +22,38 @@
     <!-- Remove this line the first time you edit this file -->
     This is the index page of your Django app!
     <!--Add a nav bar here -->
-    <nav>
-        <a href="about">About</a>
-        <a href="contact">Contact us</a>
+    <nav class="navbar navbar-light bg-dark">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand text-light" href="#">Dealership Review</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          {% if user.is_authenticated %}
+          <li>
+            <a class="btn btn-link" href="#"
+              >{{ user.first_name }}({{ user.username }})</a
+            >
+            <a class="btn btn-link" href="{% url 'djangoapp:logout' %}"
+              >Logout</a
+            >
+          </li>
+          {% else %}
+          <li>
+            <a class="btn btn-primary" href="{% url 'djangoapp:login' %}"
+              >Login</a
+            >
+            <a class="btn btn-primary" href="{% url 'djangoapp:register' %}"
+              >Register</a
+            >
+          </li>
+          {% endif %}
+        </ul>
+      </div>
     </nav>
+
+    <div id="content" name="content" , class="main">
+      {% block content %} {% endblock %}
+    </div>
 
     <!--Add a dealer table here -->
   </body>
